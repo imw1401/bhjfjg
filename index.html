@@ -4,47 +4,86 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>수행평가 점수 확인</title>
+<!-- 동글동글하고 귀여운 Jua 폰트 불러오기 -->
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <style>
-  body { font-family: 'Malgun Gothic', sans-serif; background: #f4f7f6; margin: 0; padding: 20px; text-align: center; }
-  .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-  input, button, select { padding: 10px; margin: 5px; border-radius: 5px; border: 1px solid #ccc; font-size: 16px; }
-  button { background: #007bff; color: white; cursor: pointer; border: none; }
-  button:hover { background: #0056b3; }
+  body { 
+    font-family: 'Jua', sans-serif; /* 동글동글 폰트 적용 */
+    background: #fff5f7; /* 부드러운 연핑크 배경 */
+    color: #555;
+    margin: 0; padding: 20px; text-align: center; 
+  }
+  .container { 
+    max-width: 800px; margin: auto; 
+    background: white; padding: 30px; 
+    border-radius: 25px; /* 모서리를 아주 둥글게 */
+    box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3); /* 부드러운 그림자 */
+    border: 3px solid #ffe5ec;
+  }
+  h2 { color: #ff8fab; font-size: 28px; margin-bottom: 20px; }
+  input, button, select { 
+    padding: 12px; margin: 5px; 
+    border-radius: 15px; 
+    border: 2px solid #ffe5ec; 
+    font-size: 18px; 
+    font-family: 'Jua', sans-serif; 
+    outline: none;
+  }
+  input:focus, select:focus { border-color: #ffb3c6; }
+  
+  /* 동글동글 예쁜 버튼 스타일 */
+  button { 
+    background: #ffb3c6; color: white; 
+    cursor: pointer; border: none; 
+    font-size: 18px; padding: 12px 20px;
+    transition: all 0.2s;
+  }
+  button:hover { background: #ff9fb4; transform: scale(1.05); }
+  .btn-gray { background: #bde0fe; color: #555; }
+  .btn-gray:hover { background: #a2d2ff; }
+  
   .hidden { display: none; }
-  table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-  th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-  th { background: #f8f9fa; }
-  td input { width: 90%; padding: 5px; margin: 0; box-sizing: border-box; }
-  .success-msg { color: #28a745; font-weight: bold; margin-top: 10px; display: none; }
-  .loading { color: #007bff; font-weight: bold; margin-top: 10px; display: none; }
-  @media (max-width: 600px) { table { font-size: 12px; } td input { font-size: 12px; } }
+  
+  /* 표(Table) 스타일 부드럽게 */
+  table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 15px; border-radius: 15px; overflow: hidden; border: 2px solid #ffe5ec; }
+  th, td { border-bottom: 1px solid #ffe5ec; border-right: 1px solid #ffe5ec; padding: 10px; text-align: center; }
+  th { background: #ffe5ec; color: #666; font-size: 18px; }
+  th:last-child, td:last-child { border-right: none; }
+  tr:last-child td { border-bottom: none; }
+  td input { width: 90%; padding: 8px; margin: 0; box-sizing: border-box; font-size: 16px; border: 1px solid #eee; }
+  
+  .success-msg { color: #ff6b81; font-size: 20px; margin-top: 15px; display: none; }
+  .loading { color: #ff9fb4; font-size: 18px; margin-top: 10px; display: none; }
+  @media (max-width: 600px) { table { font-size: 14px; } td input { font-size: 14px; } button { font-size: 16px; } }
 </style>
 </head>
 <body>
 
+<!-- 메인 메뉴 -->
 <div class="container" id="mainMenu">
-  <h2>수행평가 점수 확인 시스템</h2>
-  <button onclick="showSection('studentLogin')">학생용 모드</button>
-  <button onclick="showSection('teacherLogin')" style="background:#6c757d;">교사용 모드</button>
+  <h2>🌟 수행평가 점수 확인 🌟</h2>
+  <p>환영합니다! 아래 버튼을 선택해주세요.</p>
+  <button onclick="showSection('studentLogin')">👩‍🎓 학생용 모드</button>
+  <button onclick="showSection('teacherLogin')" class="btn-gray">👩‍🏫 교사용 모드</button>
 </div>
 
 <!-- 학생 로그인 -->
 <div class="container hidden" id="studentLogin">
-  <h2>학생 로그인</h2>
+  <h2>👩‍🎓 학생 로그인</h2>
   <input type="text" id="studentId" placeholder="학번 (예: 30101)"><br>
   <input type="password" id="studentPw" placeholder="비밀번호 (초기: 1234)"><br>
-  <button onclick="studentLogin()">로그인</button>
-  <button onclick="showSection('mainMenu')" style="background:#6c757d;">뒤로</button>
-  <div id="studentLoading" class="loading">⏳ 점수 데이터를 불러오는 중입니다...</div>
+  <button onclick="studentLogin()">로그인 하기</button>
+  <button onclick="showSection('mainMenu')" class="btn-gray">뒤로 가기</button>
+  <div id="studentLoading" class="loading">⏳ 점수 데이터를 예쁘게 불러오는 중이에요...</div>
 </div>
 
 <!-- 학생 점수 조회 -->
 <div class="container hidden" id="studentView">
-  <h2>내 점수 확인</h2>
-  <p id="studentInfo" style="font-weight: bold; font-size: 18px;"></p>
+  <h2>✨ 내 점수 확인 ✨</h2>
+  <p id="studentInfo" style="font-size: 22px; color: #ff8fab;"></p>
   <table>
     <thead>
-      <tr><th>수행평가명</th><th>내 점수</th><th>반 평균</th><th>학년 평균</th><th>피드백</th></tr>
+      <tr><th>수행평가명</th><th>내 점수</th><th>반 평균</th><th>학년 평균</th><th>선생님 피드백 💬</th></tr>
     </thead>
     <tbody id="studentScoreBody"></tbody>
   </table>
@@ -54,41 +93,43 @@
 
 <!-- 교사 로그인 -->
 <div class="container hidden" id="teacherLogin">
-  <h2>교사 로그인</h2>
+  <h2>👩‍🏫 교사 로그인</h2>
   <input type="password" id="teacherPw" placeholder="교사 비밀번호 (기본: 1234)"><br>
-  <button onclick="teacherLogin()">로그인</button>
-  <button onclick="showSection('mainMenu')" style="background:#6c757d;">뒤로</button>
+  <button onclick="teacherLogin()">로그인 하기</button>
+  <button onclick="showSection('mainMenu')" class="btn-gray">뒤로 가기</button>
 </div>
 
 <!-- 교사 관리 페이지 -->
 <div class="container hidden" id="teacherView">
-  <h2>교사용 점수 입력</h2>
+  <h2>📋 교사용 점수 입력</h2>
   
-  <div style="text-align: left; background: #e9ecef; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
-    <strong>1. 학년 및 반 선택 (필수)</strong><br>
+  <div style="text-align: left; background: #fff0f3; padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 2px dashed #ffb3c6;">
+    <strong style="font-size: 18px;">🌸 1. 학년 선택 (기본 수행평가명 세팅용)</strong><br>
     <select id="gradeSelect" onchange="loadGradeSettings()">
       <option value="2">2학년</option>
       <option value="3" selected>3학년</option>
     </select>
-    <input type="number" id="classSelect" placeholder="반 입력 (예: 1)" style="width: 120px;"> 반
     
-    <hr style="border: 0.5px solid #ccc; margin: 15px 0;">
+    <hr style="border: 0.5px dashed #ffb3c6; margin: 15px 0;">
     
-    <strong>2. 수행평가 이름 설정</strong><br>
+    <strong style="font-size: 18px;">🌸 2. 수행평가 이름 설정</strong><br>
     <input type="text" id="sub1_name">
     <input type="text" id="sub2_name">
     <input type="text" id="sub3_name">
   </div>
 
-  <p style="font-size: 14px; color: #555;">💡 엑셀에서 [번호, 이름, 점수1, 점수2, 점수3, 피드백] 영역을 복사한 뒤, 1번 학생의 번호 칸을 클릭하고 <b>Ctrl+V</b>를 누르세요.</p>
+  <p style="font-size: 16px; color: #777;">
+    💡 엑셀에서 <b>[학번, 이름, 점수1, 점수2, 점수3, 피드백]</b> 영역을 통째로 복사한 뒤,<br>
+    아래 표의 <b>첫 번째 학생의 학번 칸</b>을 클릭하고 <b>Ctrl+V</b>를 누르시면 자동으로 채워집니다!
+  </p>
   
   <div style="overflow-x: auto;">
     <table id="scoreTable">
       <thead>
         <tr>
-          <th>번호</th><th>이름</th>
+          <th>학번 (예: 30101)</th><th>이름</th>
           <th id="th_sub1">수행1</th><th id="th_sub2">수행2</th><th id="th_sub3">수행3</th>
-          <th>피드백</th>
+          <th>피드백 💬</th>
         </tr>
       </thead>
       <tbody id="teacherTableBody">
@@ -97,15 +138,15 @@
     </table>
   </div>
   
-  <button onclick="saveData()" style="width: 100%; margin-top: 15px; font-size: 18px; padding: 15px;">서버에 일괄 저장하기</button>
-  <div id="saveLoading" class="loading">⏳ 구글 스프레드시트에 저장 중입니다... (최대 10초 소요)</div>
-  <div class="success-msg" id="saveSuccess">✅ 완료 (데이터가 일괄 저장되었습니다)</div>
-  <br><button onclick="showSection('mainMenu')" style="background:#6c757d; margin-top:10px;">로그아웃</button>
+  <button onclick="saveData()" style="width: 100%; margin-top: 15px; font-size: 22px; padding: 15px;">💖 서버에 일괄 저장하기 💖</button>
+  <div id="saveLoading" class="loading">⏳ 구글 스프레드시트에 예쁘게 저장 중입니다...</div>
+  <div class="success-msg" id="saveSuccess">✅ 짠! 데이터가 성공적으로 저장되었습니다!</div>
+  <br><button onclick="showSection('mainMenu')" class="btn-gray" style="margin-top:10px;">로그아웃</button>
 </div>
 
 <script>
-  // ★★★ 여기에 2단계에서 복사한 웹 앱 URL을 붙여넣으세요! ★★★
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwRgd4FwwKuReGCQTYFIp-KVztWcfyv1fzvL3Z4Jr6dh1HMxDSZ5uNvpc8srb5IzBCq/exec";
+  // ★★★ 여기에 새롭게 발급받은 웹 앱 URL을 붙여넣으세요! ★★★
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbynqnMRhHUmuCA597nfGe07l5Y0y2sGzmIglk1MdvEgLq22oCbuCB5h9bzwNo62MV4WgA/exec";
 
   const defaultSubjects = {
     "2": ["산업혁명", "제자백가", "포트폴리오"],
@@ -127,7 +168,7 @@
       loadGradeSettings();
       generateTeacherTable();
     } else {
-      alert('비밀번호가 틀렸습니다.');
+      alert('비밀번호가 틀렸습니다 😥');
     }
   }
 
@@ -154,13 +195,14 @@
     tbody.innerHTML = '';
     for (let i = 1; i <= 35; i++) {
       let tr = document.createElement('tr');
+      // 번호 대신 학번을 입력받도록 수정 (placeholder 추가)
       tr.innerHTML = `
-        <td><input type="text" value="${i}" class="col-0"></td>
-        <td><input type="text" class="col-1"></td>
+        <td><input type="text" placeholder="학번입력" class="col-0"></td>
+        <td><input type="text" placeholder="이름" class="col-1"></td>
         <td><input type="number" class="col-2"></td>
         <td><input type="number" class="col-3"></td>
         <td><input type="number" class="col-4"></td>
-        <td><input type="text" class="col-5"></td>
+        <td><input type="text" placeholder="피드백" class="col-5"></td>
       `;
       tbody.appendChild(tr);
     }
@@ -190,13 +232,9 @@
 
   // 서버로 데이터 전송 (저장)
   function saveData() {
-    if (WEB_APP_URL === "여기에_복사한_주소를_붙여넣으세요") {
-      alert("코드 안에 웹 앱 URL이 입력되지 않았습니다."); return;
+    if (WEB_APP_URL === "여기에_새로_복사한_주소를_붙여넣으세요") {
+      alert("코드 안에 웹 앱 URL이 입력되지 않았어요! 확인해주세요 🙏"); return;
     }
-
-    const grade = document.getElementById('gradeSelect').value;
-    const ban = document.getElementById('classSelect').value;
-    if (!ban) { alert('몇 반인지 입력해주세요!'); return; }
 
     const subjects = [
       document.getElementById('sub1_name').value,
@@ -209,9 +247,10 @@
     
     for (let i = 0; i < tbody.rows.length; i++) {
       const inputs = tbody.rows[i].querySelectorAll('input');
-      if (inputs[1].value.trim() !== '') {
+      // 학번(col-0)과 이름(col-1)이 있는 경우에만 데이터 수집
+      if (inputs[0].value.trim() !== '' && inputs[1].value.trim() !== '') {
         students.push({
-          num: inputs[0].value,
+          hakbun: inputs[0].value,
           name: inputs[1].value,
           score1: inputs[2].value,
           score2: inputs[3].value,
@@ -221,7 +260,7 @@
       }
     }
 
-    const payload = { grade: grade, ban: ban, subjects: subjects, students: students };
+    const payload = { subjects: subjects, students: students };
 
     document.getElementById('saveLoading').style.display = 'block';
     
@@ -239,7 +278,7 @@
     })
     .catch(error => {
       document.getElementById('saveLoading').style.display = 'none';
-      alert('저장 중 오류가 발생했습니다. URL을 확인해주세요.');
+      alert('저장 중 오류가 발생했습니다 😢 URL을 다시 확인해주세요.');
     });
   }
 
@@ -248,7 +287,7 @@
     const id = document.getElementById('studentId').value;
     const pw = document.getElementById('studentPw').value;
     
-    if (!id || !pw) { alert('학번과 비밀번호를 모두 입력해주세요.'); return; }
+    if (!id || !pw) { alert('학번과 비밀번호를 모두 입력해주세요 🧐'); return; }
     
     document.getElementById('studentLoading').style.display = 'block';
 
@@ -260,7 +299,7 @@
         if (data.success) {
           showSection('studentView');
           const st = data.student;
-          document.getElementById('studentInfo').innerText = `${id} ${st.name} 학생, 환영합니다.`;
+          document.getElementById('studentInfo').innerText = `🎈 ${id} ${st.name} 학생, 반가워요!`;
           
           const tbody = document.getElementById('studentScoreBody');
           tbody.innerHTML = `
@@ -274,7 +313,7 @@
       })
       .catch(error => {
         document.getElementById('studentLoading').style.display = 'none';
-        alert('데이터를 불러오지 못했습니다. 선생님께 문의하세요.');
+        alert('데이터를 불러오지 못했습니다 😥 선생님께 문의해주세요.');
       });
   }
 </script>
